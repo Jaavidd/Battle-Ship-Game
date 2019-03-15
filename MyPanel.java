@@ -37,8 +37,17 @@ public class MyPanel extends JPanel{
 	
 	ArrayList<Point> ship_2_previous_coord;
 	ArrayList<Point> ship_3_previous_coord;
+	boolean ship_3_check = false;
+	boolean ship_3_row = false;
+	boolean ship_3_column = false;
 	ArrayList<Point> ship_4_previous_coord;
+	boolean ship_4_check = false;
+	boolean ship_4_row = false;
+	boolean ship_4_column = false;
 	ArrayList<Point> ship_5_previous_coord;
+	boolean ship_5_check = false;
+	boolean ship_5_row = false;
+	boolean ship_5_column = false;
 	
 	public MyPanel() {
 		mouse = new MouseListener() {
@@ -72,36 +81,30 @@ public class MyPanel extends JPanel{
 				// TODO Auto-generated method stub
 				int row = 0;
 				int column = 0;
-				for (int i = 0; i < arr.length; i++) {
-					for (int j = 0; j < arr[0].length; j++) {
+				for (int i = 0; i < arr.length; i++) 
+					for (int j = 0; j < arr[0].length; j++) 
 						if(arr[i][j] == e.getSource()) {
 							row = i;
 							column = j;
-							break;
-						}	
-					}
-				}
+							break;	
+						}
 				if(ship_2) {
 					if(ship_2_func(row, column)) {
-//						System.out.println("inside ship_2");
 						matrix[row][column] = 1;
 						arr[row][column].setBackground(Color.RED);
 					}
 				} else if(ship_3) {
 					if(ship_3_func(row, column)) {
-//						System.out.println("inside ship_3");
 						matrix[row][column] = 1;
 						arr[row][column].setBackground(Color.RED);
 					}
 				} else if(ship_4) {
 					if(ship_4_func(row, column)) {
-//						System.out.println("inside ship_4");
 						matrix[row][column] = 1;
 						arr[row][column].setBackground(Color.RED);
 					}
 				} else if(ship_5) {
 					if(ship_5_func(row, column)) {
-//						System.out.println("inside ship_5");
 						matrix[row][column] = 1;
 						arr[row][column].setBackground(Color.RED);
 					}
@@ -217,8 +220,24 @@ public class MyPanel extends JPanel{
 	public boolean ship_3_func(int row, int column) {
 		if(matrix[row][column] == 1 || matrix[row][column] == -1)
 			return false;
-		if (ship_3_previous_coord.size() > 0) {
+		if (ship_3_check) {
 			if (ship_3_previous_coord.get(0).row_y == row) {
+				ship_3_row = true;
+			} else if (ship_3_previous_coord.get(0).column_x == column){
+				ship_3_column = true;
+			}else
+				return false;
+			ship_3_check = false;
+		}
+		if (ship_3_row) {
+			if (ship_3_previous_coord.get(0).row_y != row)
+				return false;
+		} else if (ship_3_column){
+			if (ship_3_previous_coord.get(0).column_x != column)
+				return false;
+		}
+		if (ship_3_previous_coord.size() > 0) {
+			if (ship_3_row) {
 				for (int i = 0; i < ship_3_previous_coord.size(); i++) {
 					if (column == (ship_3_previous_coord.get(i).column_x + 1) || column == (ship_3_previous_coord.get(i).column_x - 1)) {
 						ship_3_previous_coord.add(new Point(row, column));
@@ -226,12 +245,13 @@ public class MyPanel extends JPanel{
 							ship_3 = false;
 							ship_3_count--;
 							ship_3_previous_coord.clear();
+							ship_3_row = false;
 						}
 						return true;
 					}
 				}
 				return false;
-			} else if (ship_3_previous_coord.get(0).column_x == column){
+			} else if (ship_3_column){
 				for (int i = 0; i < ship_3_previous_coord.size(); i++) {
 					if (row == (ship_3_previous_coord.get(i).row_y + 1) || row == (ship_3_previous_coord.get(i).row_y - 1)) {
 						ship_3_previous_coord.add(new Point(row, column));
@@ -239,6 +259,7 @@ public class MyPanel extends JPanel{
 							ship_3 = false;
 							ship_3_count--;
 							ship_3_previous_coord.clear();
+							ship_3_column = false;
 						}
 						return true;
 					}
@@ -248,14 +269,31 @@ public class MyPanel extends JPanel{
 				return false;
 		}
 		ship_3_previous_coord.add(new Point(row, column));
+		ship_3_check = true;
 		return true;
 	}
 	
 	public boolean ship_4_func(int row, int column) {
 		if(matrix[row][column] == 1 || matrix[row][column] == -1)
 			return false;
-		if (ship_4_previous_coord.size() > 0) {
+		if (ship_4_check) {
 			if (ship_4_previous_coord.get(0).row_y == row) {
+				ship_4_row = true;
+			} else if (ship_4_previous_coord.get(0).column_x == column){
+				ship_4_column = true;
+			}else
+				return false;
+			ship_4_check = false;
+		}
+		if (ship_4_row) {
+			if (ship_4_previous_coord.get(0).row_y != row)
+				return false;
+		} else if (ship_4_column){
+			if (ship_4_previous_coord.get(0).column_x != column)
+				return false;
+		}
+		if (ship_4_previous_coord.size() > 0) {
+			if (ship_4_row) {
 				for (int i = 0; i < ship_4_previous_coord.size(); i++) {
 					if (column == (ship_4_previous_coord.get(i).column_x + 1) || column == (ship_4_previous_coord.get(i).column_x - 1)) {
 						ship_4_previous_coord.add(new Point(row, column));
@@ -263,19 +301,21 @@ public class MyPanel extends JPanel{
 							ship_4 = false;
 							ship_4_count--;
 							ship_4_previous_coord.clear();
+							ship_4_row = false;
 						}
 						return true;
 					}
 				}
 				return false;
-			} else if (ship_4_previous_coord.get(0).column_x == column){
+			} else if (ship_4_column){
 				for (int i = 0; i < ship_4_previous_coord.size(); i++) {
 					if (row == (ship_4_previous_coord.get(i).row_y + 1) || row == (ship_4_previous_coord.get(i).row_y - 1)) {
 						ship_4_previous_coord.add(new Point(row, column));
 						if(ship_4_previous_coord.size() == 4) {
 							ship_4 = false;
 							ship_4_count--;
-							ship_4_previous_coord.clear();						
+							ship_4_previous_coord.clear();	
+							ship_4_column = false;
 						}
 						return true;
 					}
@@ -285,15 +325,32 @@ public class MyPanel extends JPanel{
 				return false;
 		}
 		ship_4_previous_coord.add(new Point(row, column));
+		ship_4_check = true;
 		return true;
 	}
+	
 	
 	public boolean ship_5_func(int row, int column) {
 		if(matrix[row][column] == 1 || matrix[row][column] == -1)
 			return false;
-		if (ship_5_previous_coord.size() > 0) {
+		if (ship_5_check) {
 			if (ship_5_previous_coord.get(0).row_y == row) {
-				System.out.println("row =");
+				ship_5_row = true;
+			} else if (ship_5_previous_coord.get(0).column_x == column){
+				ship_5_column = true;
+			}else
+				return false;
+			ship_5_check = false;
+		}
+		if (ship_5_row) {
+			if (ship_5_previous_coord.get(0).row_y != row)
+				return false;
+		} else if (ship_5_column){
+			if (ship_5_previous_coord.get(0).column_x != column)
+				return false;
+		}
+		if (ship_5_previous_coord.size() > 0) {
+			if (ship_5_row) {
 				for (int i = 0; i < ship_5_previous_coord.size(); i++) {
 					if (column == (ship_5_previous_coord.get(i).column_x + 1) || column == (ship_5_previous_coord.get(i).column_x - 1)) {
 						ship_5_previous_coord.add(new Point(row, column));
@@ -301,12 +358,13 @@ public class MyPanel extends JPanel{
 							ship_5 = false;
 							ship_5_count--;
 							ship_5_previous_coord.clear();
+							ship_5_row = false;
 						}
 						return true;
 					}
 				}
 				return false;
-			} else if (ship_5_previous_coord.get(0).column_x == column){
+			} else if (ship_5_column){
 				for (int i = 0; i < ship_5_previous_coord.size(); i++) {
 					if (row == (ship_5_previous_coord.get(i).row_y + 1) || row == (ship_5_previous_coord.get(i).row_y - 1)) {
 						ship_5_previous_coord.add(new Point(row, column));
@@ -314,6 +372,7 @@ public class MyPanel extends JPanel{
 							ship_5 = false;
 							ship_5_count--;
 							ship_5_previous_coord.clear();
+							ship_5_column = false;
 						}
 						return true;
 					}
@@ -323,6 +382,7 @@ public class MyPanel extends JPanel{
 				return false;
 		}
 		ship_5_previous_coord.add(new Point(row, column));
+		ship_5_check = true;
 		return true;
 	}
 }
