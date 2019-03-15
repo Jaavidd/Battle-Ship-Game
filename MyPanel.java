@@ -12,11 +12,11 @@ import javax.swing.JPanel;
 
 
 class Point{
-	int x;
-	int y;
-	public Point(int y, int x) {
-		this.y = y;
-		this.x = x;
+	int column_x;
+	int row_y;
+	public Point(int row_y, int column_x) {
+		this.row_y = row_y;
+		this.column_x = column_x;
 	}
 }
 
@@ -167,20 +167,17 @@ public class MyPanel extends JPanel{
 		case 3:
 			if (ship_3_count != 0) {
 				ship_3 = true;
-				
 			}
 			break;
 		case 4:
 			if (ship_4_count != 0) {
 				ship_4 = true;
-				
 			}
 			break;
 		default:
 			if (ship_5_count != 0) {
 				ship_5 = true;
-				
-		}
+			}
 			break;
 		}
 	}
@@ -188,16 +185,9 @@ public class MyPanel extends JPanel{
 	public boolean ship_2_func(int row, int column) {
 		if(matrix[row][column] == 1 || matrix[row][column] == -1)
 			return false;
-		System.out.println("size is "+ship_2_previous_coord.size());
-//		if(ship_2_previous_coord.size() == 2) {
-//			ship_2 = false;
-//			ship_2_count--;
-//			ship_2_previous_coord.clear();
-//			return false;
-//		}
 		if (ship_2_previous_coord.size() > 0) {
-			if (ship_2_previous_coord.get(0).y == row) {
-				if (column == (ship_2_previous_coord.get(0).x + 1) || column == (ship_2_previous_coord.get(0).x - 1)) {
+			if (ship_2_previous_coord.get(0).row_y == row) {
+				if (column == (ship_2_previous_coord.get(0).column_x + 1) || column == (ship_2_previous_coord.get(0).column_x - 1)) {
 					ship_2_previous_coord.add(new Point(row, column));
 					if(ship_2_previous_coord.size() == 2) {
 						ship_2 = false;
@@ -206,8 +196,9 @@ public class MyPanel extends JPanel{
 					}
 					return true;
 				}
-			}else if (ship_2_previous_coord.get(0).x == column) {
-				if (row == (ship_2_previous_coord.get(0).y + 1) || row == (ship_2_previous_coord.get(0).y - 1)) {
+				return false;
+			}else if (ship_2_previous_coord.get(0).column_x == column) {
+				if (row == (ship_2_previous_coord.get(0).row_y + 1) || row == (ship_2_previous_coord.get(0).row_y - 1)) {
 					ship_2_previous_coord.add(new Point(row, column));
 					if(ship_2_previous_coord.size() == 2) {
 						ship_2 = false;
@@ -216,6 +207,7 @@ public class MyPanel extends JPanel{
 					}
 					return true;
 				}
+				return false;
 			}
 		}
 		ship_2_previous_coord.add(new Point(row, column));
@@ -223,19 +215,12 @@ public class MyPanel extends JPanel{
 	}
 	
 	public boolean ship_3_func(int row, int column) {
-		boolean row_boolean = false;
-		boolean column_boolean = false;
 		if(matrix[row][column] == 1 || matrix[row][column] == -1)
 			return false;
 		if (ship_3_previous_coord.size() > 0) {
-			if (ship_3_previous_coord.get(0).y == row) {
-				row_boolean = true;
-			} else {
-				column_boolean = true;
-			}
-			if (row_boolean) {
+			if (ship_3_previous_coord.get(0).row_y == row) {
 				for (int i = 0; i < ship_3_previous_coord.size(); i++) {
-					if (column == (ship_3_previous_coord.get(i).x + 1) || column == (ship_3_previous_coord.get(i).x - 1)) {
+					if (column == (ship_3_previous_coord.get(i).column_x + 1) || column == (ship_3_previous_coord.get(i).column_x - 1)) {
 						ship_3_previous_coord.add(new Point(row, column));
 						if(ship_3_previous_coord.size() == 3) {
 							ship_3 = false;
@@ -245,9 +230,10 @@ public class MyPanel extends JPanel{
 						return true;
 					}
 				}
-			} else if (column_boolean){
+				return false;
+			} else if (ship_3_previous_coord.get(0).column_x == column){
 				for (int i = 0; i < ship_3_previous_coord.size(); i++) {
-					if (row == (ship_3_previous_coord.get(i).y + 1) || row == (ship_3_previous_coord.get(i).y - 1)) {
+					if (row == (ship_3_previous_coord.get(i).row_y + 1) || row == (ship_3_previous_coord.get(i).row_y - 1)) {
 						ship_3_previous_coord.add(new Point(row, column));
 						if(ship_3_previous_coord.size() == 3) {
 							ship_3 = false;
@@ -257,6 +243,7 @@ public class MyPanel extends JPanel{
 						return true;
 					}
 				}
+				return false;
 			}else
 				return false;
 		}
@@ -267,27 +254,33 @@ public class MyPanel extends JPanel{
 	public boolean ship_4_func(int row, int column) {
 		if(matrix[row][column] == 1 || matrix[row][column] == -1)
 			return false;
-		if(ship_4_previous_coord.size() == 4) {
-			ship_4 = false;
-			ship_4_count--;
-			ship_4_previous_coord.clear();
-			return false;
-		}
 		if (ship_4_previous_coord.size() > 0) {
-			if (ship_4_previous_coord.get(0).y == row) {
+			if (ship_4_previous_coord.get(0).row_y == row) {
 				for (int i = 0; i < ship_4_previous_coord.size(); i++) {
-					if (column == (ship_4_previous_coord.get(i).x + 1) || column == (ship_4_previous_coord.get(i).x - 1)) {
+					if (column == (ship_4_previous_coord.get(i).column_x + 1) || column == (ship_4_previous_coord.get(i).column_x - 1)) {
 						ship_4_previous_coord.add(new Point(row, column));
+						if(ship_4_previous_coord.size() == 4) {
+							ship_4 = false;
+							ship_4_count--;
+							ship_4_previous_coord.clear();
+						}
 						return true;
 					}
 				}
-			} else if (ship_4_previous_coord.get(0).x == column){
+				return false;
+			} else if (ship_4_previous_coord.get(0).column_x == column){
 				for (int i = 0; i < ship_4_previous_coord.size(); i++) {
-					if (row == (ship_4_previous_coord.get(i).y + 1) || row == (ship_4_previous_coord.get(i).y - 1)) {
+					if (row == (ship_4_previous_coord.get(i).row_y + 1) || row == (ship_4_previous_coord.get(i).row_y - 1)) {
 						ship_4_previous_coord.add(new Point(row, column));
+						if(ship_4_previous_coord.size() == 4) {
+							ship_4 = false;
+							ship_4_count--;
+							ship_4_previous_coord.clear();						
+						}
 						return true;
 					}
 				}
+				return false;
 			}else
 				return false;
 		}
@@ -298,12 +291,11 @@ public class MyPanel extends JPanel{
 	public boolean ship_5_func(int row, int column) {
 		if(matrix[row][column] == 1 || matrix[row][column] == -1)
 			return false;
-		System.out.println("inside ship_5_func");
 		if (ship_5_previous_coord.size() > 0) {
-			if (ship_5_previous_coord.get(0).y == row) {
+			if (ship_5_previous_coord.get(0).row_y == row) {
 				System.out.println("row =");
 				for (int i = 0; i < ship_5_previous_coord.size(); i++) {
-					if (column == (ship_5_previous_coord.get(i).x + 1) || column == (ship_5_previous_coord.get(i).x - 1)) {
+					if (column == (ship_5_previous_coord.get(i).column_x + 1) || column == (ship_5_previous_coord.get(i).column_x - 1)) {
 						ship_5_previous_coord.add(new Point(row, column));
 						if(ship_5_previous_coord.size() == 5) {
 							ship_5 = false;
@@ -313,9 +305,10 @@ public class MyPanel extends JPanel{
 						return true;
 					}
 				}
-			} else if (ship_5_previous_coord.get(0).x == column){
+				return false;
+			} else if (ship_5_previous_coord.get(0).column_x == column){
 				for (int i = 0; i < ship_5_previous_coord.size(); i++) {
-					if (row == (ship_5_previous_coord.get(i).y + 1) || row == (ship_5_previous_coord.get(i).y - 1)) {
+					if (row == (ship_5_previous_coord.get(i).row_y + 1) || row == (ship_5_previous_coord.get(i).row_y - 1)) {
 						ship_5_previous_coord.add(new Point(row, column));
 						if(ship_5_previous_coord.size() == 5) {
 							ship_5 = false;
@@ -325,6 +318,7 @@ public class MyPanel extends JPanel{
 						return true;
 					}
 				}
+				return false;
 			}else
 				return false;
 		}

@@ -34,9 +34,9 @@ public class Test {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		
-		panelLeft.fill_PANEL_BOATS(2);
-//		panelLeft.fill_PANEL_BOATS(3);
-//		panelLeft.fill_PANEL_BOATS(5);
+//		panelLeft.fill_PANEL_BOATS(2);
+		panelLeft.fill_PANEL_BOATS(3);
+		panelLeft.fill_PANEL_BOATS(5);
 	}
 	
 }
