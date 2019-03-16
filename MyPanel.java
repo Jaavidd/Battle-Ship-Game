@@ -194,6 +194,7 @@ public class MyPanel extends JPanel{
 				if (column == (ship_2_previous_coord.get(0).column_x + 1) || column == (ship_2_previous_coord.get(0).column_x - 1)) {
 					ship_2_previous_coord.add(new Point(row, column));
 					if(ship_2_previous_coord.size() == 2) {
+						horizontal_surround(ship_2_previous_coord);
 						ship_2 = false;
 						ship_2_count--;
 						ship_2_previous_coord.clear();
@@ -244,6 +245,7 @@ public class MyPanel extends JPanel{
 					if (column == (ship_3_previous_coord.get(i).column_x + 1) || column == (ship_3_previous_coord.get(i).column_x - 1)) {
 						ship_3_previous_coord.add(new Point(row, column));
 						if(ship_3_previous_coord.size() == 3) {
+							horizontal_surround(ship_3_previous_coord);
 							ship_3 = false;
 							ship_3_count--;
 							ship_3_previous_coord.clear();
@@ -301,6 +303,7 @@ public class MyPanel extends JPanel{
 					if (column == (ship_4_previous_coord.get(i).column_x + 1) || column == (ship_4_previous_coord.get(i).column_x - 1)) {
 						ship_4_previous_coord.add(new Point(row, column));
 						if(ship_4_previous_coord.size() == 4) {
+							horizontal_surround(ship_4_previous_coord);
 							ship_4 = false;
 							ship_4_count--;
 							ship_4_previous_coord.clear();
@@ -359,6 +362,7 @@ public class MyPanel extends JPanel{
 					if (column == (ship_5_previous_coord.get(i).column_x + 1) || column == (ship_5_previous_coord.get(i).column_x - 1)) {
 						ship_5_previous_coord.add(new Point(row, column));
 						if(ship_5_previous_coord.size() == 5) {
+							horizontal_surround(ship_5_previous_coord);
 							ship_5 = false;
 							ship_5_count--;
 							ship_5_previous_coord.clear();
@@ -419,6 +423,37 @@ public class MyPanel extends JPanel{
 				matrix[max+1][(temp_list.get(0).column_x-1)] = -1;
 			if ((temp_list.get(0).column_x+1) <= 9) 
 				matrix[max+1][(temp_list.get(0).column_x+1)] = -1;
+		}
+	}
+	
+	
+	public void horizontal_surround(ArrayList<Point> temp_list) {
+		int min = 10;
+		int max = 0;
+		for (int i = 0; i < temp_list.size(); i++) {
+			if (temp_list.get(i).column_x > max) 
+				max = temp_list.get(i).column_x;
+			if (temp_list.get(i).column_x < min) 
+				min = temp_list.get(i).column_x;
+			if ((temp_list.get(i).row_y-1) >= 0) 
+				matrix[temp_list.get(i).row_y-1][(temp_list.get(i).column_x)] = -1;
+			if ((temp_list.get(i).row_y+1) <= 9) 
+				matrix[temp_list.get(i).row_y+1][(temp_list.get(i).column_x)] = -1;
+		}
+		System.out.println("min : "+min+" max : "+max);
+		if (min != 0) {
+			matrix[temp_list.get(0).row_y][min-1] = -1;
+			if ((temp_list.get(0).row_y-1) >= 0) 
+				matrix[(temp_list.get(0).row_y-1)][min-1] = -1;
+			if ((temp_list.get(0).row_y+1) <= 9) 
+				matrix[(temp_list.get(0).row_y+1)][min-1] = -1;
+		}
+		if (max != 9) {
+			matrix[(temp_list.get(0).row_y)][max+1] = -1;
+			if ((temp_list.get(0).row_y-1) >= 0) 
+			matrix[(temp_list.get(0).row_y-1)][max+1] = -1;
+			if ((temp_list.get(0).row_y+1) <= 9) 
+			matrix[(temp_list.get(0).row_y)+1][max+1] = -1;
 		}
 	}
 	
