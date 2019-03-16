@@ -35,7 +35,7 @@ public class Test {
 		frame.setVisible(true);
 		
 //		panelLeft.fill_PANEL_BOATS(2);
-		panelLeft.fill_PANEL_BOATS(3);
+//		panelLeft.fill_PANEL_BOATS(3);
 		panelLeft.fill_PANEL_BOATS(4);
 		panelLeft.fill_PANEL_BOATS(5);
 	}

@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -204,6 +205,7 @@ public class MyPanel extends JPanel{
 				if (row == (ship_2_previous_coord.get(0).row_y + 1) || row == (ship_2_previous_coord.get(0).row_y - 1)) {
 					ship_2_previous_coord.add(new Point(row, column));
 					if(ship_2_previous_coord.size() == 2) {
+						vertical_surround(ship_2_previous_coord);
 						ship_2 = false;
 						ship_2_count--;
 						ship_2_previous_coord.clear();
@@ -256,6 +258,7 @@ public class MyPanel extends JPanel{
 					if (row == (ship_3_previous_coord.get(i).row_y + 1) || row == (ship_3_previous_coord.get(i).row_y - 1)) {
 						ship_3_previous_coord.add(new Point(row, column));
 						if(ship_3_previous_coord.size() == 3) {
+							vertical_surround(ship_3_previous_coord);
 							ship_3 = false;
 							ship_3_count--;
 							ship_3_previous_coord.clear();
@@ -312,6 +315,7 @@ public class MyPanel extends JPanel{
 					if (row == (ship_4_previous_coord.get(i).row_y + 1) || row == (ship_4_previous_coord.get(i).row_y - 1)) {
 						ship_4_previous_coord.add(new Point(row, column));
 						if(ship_4_previous_coord.size() == 4) {
+							vertical_surround(ship_4_previous_coord);
 							ship_4 = false;
 							ship_4_count--;
 							ship_4_previous_coord.clear();	
@@ -369,6 +373,7 @@ public class MyPanel extends JPanel{
 					if (row == (ship_5_previous_coord.get(i).row_y + 1) || row == (ship_5_previous_coord.get(i).row_y - 1)) {
 						ship_5_previous_coord.add(new Point(row, column));
 						if(ship_5_previous_coord.size() == 5) {
+							vertical_surround(ship_5_previous_coord);
 							ship_5 = false;
 							ship_5_count--;
 							ship_5_previous_coord.clear();
@@ -385,4 +390,79 @@ public class MyPanel extends JPanel{
 		ship_5_check = true;
 		return true;
 	}
+	
+	
+	
+	public void vertical_surround(ArrayList<Point> temp_list) {
+		int min = 10;
+		int max = 0;
+		for (int i = 0; i < temp_list.size(); i++) {
+			if (temp_list.get(i).row_y > max) 
+				max = temp_list.get(i).row_y;
+			if (temp_list.get(i).row_y < min) 
+				min = temp_list.get(i).row_y;
+			if ((temp_list.get(i).column_x-1) >= 0) 
+				matrix[temp_list.get(i).row_y][(temp_list.get(i).column_x-1)] = -1;
+			if ((temp_list.get(i).column_x+1) <= 9) 
+				matrix[temp_list.get(i).row_y][(temp_list.get(i).column_x+1)] = -1;
+		}
+		if (min != 0) {
+			matrix[min-1][temp_list.get(0).column_x] = -1;
+			if ((temp_list.get(0).column_x-1) >= 0) 
+				matrix[min-1][(temp_list.get(0).column_x-1)] = -1;
+			if ((temp_list.get(0).column_x+1) <= 9) 
+				matrix[min-1][(temp_list.get(0).column_x+1)] = -1;
+		}
+		if (max != 9) {
+			matrix[max+1][temp_list.get(0).column_x] = -1;
+			if ((temp_list.get(0).column_x-1) >= 0) 
+				matrix[max+1][(temp_list.get(0).column_x-1)] = -1;
+			if ((temp_list.get(0).column_x+1) <= 9) 
+				matrix[max+1][(temp_list.get(0).column_x+1)] = -1;
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
