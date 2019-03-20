@@ -176,15 +176,19 @@ public class MyPanel extends JPanel{
 		ship_obj.reset(matrix, arr);
 		if (ship_2) {
 			count_2 = 0;
+			ship_2 = false;
 		}
 		if (ship_3) {
 			count_3 = 0;
+			ship_3 = false;
 		}
 		if (ship_4) {
 			count_4 = 0;
+			ship_4 = false;
 		}
 		if (ship_5) {
 			count_5 = 0;
+			ship_5 = false;
 		}
 	}
 	

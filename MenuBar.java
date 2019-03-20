@@ -54,30 +54,40 @@ public class MenuBar extends JPanel{
 						panel.fill_PANEL_BOATS(mode);
 						ship_2_count--;
 					}	
-				}
-				if (e.getSource() == ship_3) {
+				}else if (e.getSource() == ship_3) {
 					if (ship_3_count > 0) {
 						mode = 3;
 						panel.fill_PANEL_BOATS(mode);
 						ship_3_count--;
 					}
-				}
-				if (e.getSource() == ship_4) {
+				}else if (e.getSource() == ship_4) {
 					if (ship_4_count > 0) {
 						mode = 4;
 						panel.fill_PANEL_BOATS(mode);
 						ship_4_count--;
 					}
-				}
-				if (e.getSource() == ship_5) {
+				}else if (e.getSource() == ship_5) {
 					if (ship_5_count > 0) {
 						mode = 5;
 						panel.fill_PANEL_BOATS(mode);
 						ship_5_count--;
 					}
-				}
-				if (e.getSource() == reset) {
+				}else if (e.getSource() == reset) {
 					panel.panel_reset();
+					switch(mode) {
+						case 2:
+							ship_2_count++;
+							break;
+						case 3:
+							ship_3_count++;
+							break;
+						case 4:
+							ship_4_count++;
+							break;
+						case 5:
+							ship_5_count++;
+							break;
+					}
 				}
 			}
 		};
