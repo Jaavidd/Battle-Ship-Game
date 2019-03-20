@@ -14,7 +14,10 @@ import javax.swing.JPanel;
 public class MenuBar extends JPanel{
 	MyPanel panel;
 	MouseListener listener;
+	int ship_2_count = 1;
 	int ship_3_count = 2;
+	int ship_4_count = 1;
+	int ship_5_count = 1;
 	JButton ship_2;
 	JButton ship_3;
 	JButton ship_4;
@@ -46,52 +49,36 @@ public class MenuBar extends JPanel{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (e.getSource() == ship_2) {
-					mode = 2;
-					panel.fill_PANEL_BOATS(mode);
-					ship_2.removeMouseListener(listener);
+					if (ship_2_count > 0) {
+						mode = 2;
+						panel.fill_PANEL_BOATS(mode);
+						ship_2_count--;
+					}	
 				}
 				if (e.getSource() == ship_3) {
-					mode = 3;
-					panel.fill_PANEL_BOATS(mode);
-					if (ship_3_count == 1) {
-						ship_3.removeMouseListener(listener);
-					}else
+					if (ship_3_count > 0) {
+						mode = 3;
+						panel.fill_PANEL_BOATS(mode);
 						ship_3_count--;
+					}
 				}
 				if (e.getSource() == ship_4) {
-					mode = 4;
-					panel.fill_PANEL_BOATS(mode);
-					ship_4.removeMouseListener(listener);
+					if (ship_4_count > 0) {
+						mode = 4;
+						panel.fill_PANEL_BOATS(mode);
+						ship_4_count--;
+					}
 				}
 				if (e.getSource() == ship_5) {
-					mode = 5;
-					panel.fill_PANEL_BOATS(mode);
-					ship_5.removeMouseListener(listener);
+					if (ship_5_count > 0) {
+						mode = 5;
+						panel.fill_PANEL_BOATS(mode);
+						ship_5_count--;
+					}
 				}
-//				if (e.getSource() == reset) {
-//					panel.panel_reset();
-//					switch(mode) {
-//						case 2:
-//							System.out.println("2");
-//							ship_2.addMouseListener(listener);
-//							break;
-//						case 3:
-//							System.out.println("3");
-//							if (ship_3_count == 0)
-//								ship_3_count++;
-//							else
-//								ship_3.addMouseListener(listener);
-//							break;
-//						case 4:
-//							System.out.println("4");
-//							ship_4.addMouseListener(listener);
-//							break;
-//						case 5:
-//							System.out.println("5");
-//							ship_5.addMouseListener(listener);
-//							break;
-//					}
-//				}
+				if (e.getSource() == reset) {
+					panel.panel_reset();
+				}
 			}
 		};
 
@@ -105,7 +92,6 @@ public class MenuBar extends JPanel{
 		ship_4.addMouseListener(listener);
 		ship_5.addMouseListener(listener);
 		reset.addMouseListener(listener);
-
 		setLayout(new FlowLayout());
 		setVisible(true);
 		add(ship_2);

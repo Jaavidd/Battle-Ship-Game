@@ -172,9 +172,21 @@ public class MyPanel extends JPanel{
 	}
 	
 	
-//	public void panel_reset() {
-//		ship_obj.reset(matrix, arr);
-//	}
+	public void panel_reset() {
+		ship_obj.reset(matrix, arr);
+		if (ship_2) {
+			count_2 = 0;
+		}
+		if (ship_3) {
+			count_3 = 0;
+		}
+		if (ship_4) {
+			count_4 = 0;
+		}
+		if (ship_5) {
+			count_5 = 0;
+		}
+	}
 	
 	
 	

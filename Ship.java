@@ -143,18 +143,18 @@ public class Ship {
 	}
 	
 	
-//	public static void reset(int[][] matrix, JButton arr[][]) {
-//		for (int i = 0; i < list.size(); i++) {
-//			matrix[list.get(i).row][list.get(i).column] = 0;
-//			arr[list.get(i).row][list.get(i).column].setBackground(null);
-//		}
-//		list.clear();
-////		isFree = true;
-//		check = false;
-//		row_boolean = false;
-//		column_boolean = false;
-//		
-//	}
+	public static void reset(int[][] matrix, JButton arr[][]) {
+		for (int i = 0; i < list.size(); i++) {
+			matrix[list.get(i).row][list.get(i).column] = 0;
+			arr[list.get(i).row][list.get(i).column].setBackground(null);
+		}
+		list.clear();
+//		isFree = true;
+		check = false;
+		row_boolean = false;
+		column_boolean = false;
+		
+	}
 
 	
 	
