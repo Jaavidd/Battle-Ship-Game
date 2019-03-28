@@ -144,7 +144,10 @@ public class MyPanel extends JPanel{
 	public void printM() {
 		for (int i = 0; i < matrix_usr.length; i++) {
 			for (int j = 0; j < matrix_usr[0].length; j++) {
-				System.out.print(matrix_usr[i][j] + " ");
+				if (matrix_usr[i][j] == -1) 
+					System.out.print("2 "); // instead of printing -1 print 2 (neglect sign)
+				else
+					System.out.print(matrix_usr[i][j] + " ");
 			}
 			System.out.println();
 		}
