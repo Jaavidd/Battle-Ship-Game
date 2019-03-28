@@ -15,7 +15,6 @@ class Point{
 }
 
 public class Ship {
-//	static boolean isFree = true;
 	static ArrayList<Point> list = new ArrayList<>();
 	static boolean check = false;
 	static boolean row_boolean = false;
@@ -50,7 +49,6 @@ public class Ship {
 						list.add(new Point(row, column));
 						if(list.size() == mode) {
 							horizontal_surround(matrix);
-//							isFree = true;
 							list.clear();
 							row_boolean = false;
 						}
@@ -64,7 +62,6 @@ public class Ship {
 						list.add(new Point(row, column));
 						if(list.size() == mode) {
 							vertical_surround(matrix);
-//							isFree = true;
 							list.clear();
 							column_boolean = false;
 						}
