@@ -1,10 +1,6 @@
 package main;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -25,6 +21,8 @@ public class MenuBar extends JPanel{
 	JButton reset;
 	int mode;
 	
+	
+	// nujno ispravit kak predotvratit reset koqda uje vse zakoncilos
 	
 	public MenuBar(MyPanel panel) {
 		this.panel = panel;
@@ -48,47 +46,50 @@ public class MenuBar extends JPanel{
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (e.getSource() == ship_2) {
-					if (ship_2_count > 0) {
-						mode = 2;
-						panel.fill_PANEL_BOATS(mode);
-						ship_2_count--;
-					}	
-				}else if (e.getSource() == ship_3) {
-					if (ship_3_count > 0) {
-						mode = 3;
-						panel.fill_PANEL_BOATS(mode);
-						ship_3_count--;
-					}
-				}else if (e.getSource() == ship_4) {
-					if (ship_4_count > 0) {
-						mode = 4;
-						panel.fill_PANEL_BOATS(mode);
-						ship_4_count--;
-					}
-				}else if (e.getSource() == ship_5) {
-					if (ship_5_count > 0) {
-						mode = 5;
-						panel.fill_PANEL_BOATS(mode);
-						ship_5_count--;
-					}
-				}else if (e.getSource() == reset) {
-					panel.panel_reset();
-					switch(mode) {
-						case 2:
-							ship_2_count++;
-							break;
-						case 3:
-							ship_3_count++;
-							break;
-						case 4:
-							ship_4_count++;
-							break;
-						case 5:
-							ship_5_count++;
-							break;
+				if (panel.cell_counter != 17) {
+					if (e.getSource() == ship_2) {
+						if (ship_2_count > 0) {
+							mode = 2;
+							panel.fill_PANEL_BOATS(mode);
+							ship_2_count--;
+						}	
+					}else if (e.getSource() == ship_3) {
+						if (ship_3_count > 0) {
+							mode = 3;
+							panel.fill_PANEL_BOATS(mode);
+							ship_3_count--;
+						}
+					}else if (e.getSource() == ship_4) {
+						if (ship_4_count > 0) {
+							mode = 4;
+							panel.fill_PANEL_BOATS(mode);
+							ship_4_count--;
+						}
+					}else if (e.getSource() == ship_5) {
+						if (ship_5_count > 0) {
+							mode = 5;
+							panel.fill_PANEL_BOATS(mode);
+							ship_5_count--;
+						}
+					}else if (e.getSource() == reset) {
+						panel.panel_reset();
+						switch(mode) {
+							case 2:
+								ship_2_count++;
+								break;
+							case 3:
+								ship_3_count++;
+								break;
+							case 4:
+								ship_4_count++;
+								break;
+							case 5:
+								ship_5_count++;
+								break;
+						}
 					}
 				}
+				
 			}
 		};
 

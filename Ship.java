@@ -1,6 +1,5 @@
 package main;
 
-import java.awt.List;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -122,7 +121,6 @@ public class Ship {
 			if ((list.get(i).row+1) <= 9) 
 				matrix[list.get(i).row+1][(list.get(i).column)] = -1;
 		}
-//		System.out.println("min : "+min+" max : "+max);
 		if (min != 0) {
 			matrix[list.get(0).row][min-1] = -1;
 			if ((list.get(0).row-1) >= 0) 
@@ -146,7 +144,6 @@ public class Ship {
 			arr[list.get(i).row][list.get(i).column].setBackground(null);
 		}
 		list.clear();
-//		isFree = true;
 		check = false;
 		row_boolean = false;
 		column_boolean = false;

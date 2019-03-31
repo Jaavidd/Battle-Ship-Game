@@ -13,15 +13,15 @@ import javax.swing.JPanel;
 public class Test {
 	static JFrame frame;
 	static MyPanel panelLeft;
-	static MyPanel panelRight;
+	static EnemyPanel panelRight;
 	static MenuBar panelBottom;
 	static GridLayout frameLayout;
 	
 	public static void main(String[] args) {
 		frame = new JFrame("BattleShip");
 		
-		panelLeft = new MyPanel();
-		panelRight = new MyPanel();
+		panelLeft = new MyPanel(panelRight);
+		panelRight = new EnemyPanel(panelLeft);
 		panelBottom = new MenuBar(panelLeft);
 		panelBottom.setSize(frame.getWidth(), frame.getHeight());
 		

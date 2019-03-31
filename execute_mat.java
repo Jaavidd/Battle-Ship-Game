@@ -28,7 +28,7 @@ public class execute_mat {
 		for (int i = 0; i < matrix_usr.length; i++) {
 			for (int j = 0; j < matrix_usr[0].length; j++) {
 				if (matrix_usr[i][j] == -1) 
-					System.out.print("2 "); // instead of printing -1 print 2 (neglect sign)
+					System.out.print("2 "); // instead of printing -1 print 2 (neglect sign, don't break matrix look)
 				else
 					System.out.print(matrix_usr[i][j] + " ");
 			}

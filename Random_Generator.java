@@ -3,11 +3,11 @@ package main;
 import java.util.Random;
 
 public class Random_Generator {
-	private int matrix_bot[][];
+	private int matrix_bot[][] = new int[10][10];
 	
 	
 	public Random_Generator() {
-		matrix_bot = new int[10][10];
+//		matrix_bot = new int[10][10];
 		engine();
 	}
 	

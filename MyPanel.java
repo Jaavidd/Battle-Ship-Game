@@ -5,17 +5,16 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 
 public class MyPanel extends JPanel{
+	EnemyPanel panelRight;
 	Ship ship_obj = new Ship();
 	GridLayout panelLayout;
-	JButton arr[][];
+	private JButton arr[][];
 	int matrix_usr[][];
 	boolean ship_2 = false;
 	boolean ship_3 = false;
@@ -31,7 +30,8 @@ public class MyPanel extends JPanel{
 	
 	MouseListener mouse;
 	
-	public MyPanel() {
+	public MyPanel(EnemyPanel panelRight) {
+		this.panelRight = (EnemyPanel)panelRight;
 		mouse = new MouseListener() {
 			
 			@Override
@@ -129,7 +129,7 @@ public class MyPanel extends JPanel{
 		
 	}
 	
-	public void fill_BUTTONS() {
+	private  void fill_BUTTONS() {
 		JButton bt;
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
@@ -145,7 +145,7 @@ public class MyPanel extends JPanel{
 		for (int i = 0; i < matrix_usr.length; i++) {
 			for (int j = 0; j < matrix_usr[0].length; j++) {
 				if (matrix_usr[i][j] == -1) 
-					System.out.print("2 "); // instead of printing -1 print 2 (neglect sign)
+					System.out.print("2 "); // instead of printing -1 print 2 (neglect sign, don't break matrix look)
 				else
 					System.out.print(matrix_usr[i][j] + " ");
 			}
@@ -191,14 +191,6 @@ public class MyPanel extends JPanel{
 			ship_5 = false;
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
