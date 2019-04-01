@@ -3,11 +3,11 @@ package main;
 import java.util.Random;
 
 public class Random_Generator {
-	private int matrix_bot[][] = new int[10][10];
+	private int matrix_bot[][];
 	
 	
 	public Random_Generator() {
-//		matrix_bot = new int[10][10];
+		matrix_bot = new int[10][10];
 		engine();
 	}
 	
@@ -37,65 +37,143 @@ public class Random_Generator {
 	}
 	
 	public boolean check_direction(int x, int y, int direction, int mode) {
+		if(matrix_bot[y][x] == 1 || matrix_bot[y][x] == -1)
+			return false;
 		switch(direction) {
 			case 0:
-				if((y-mode) < 0) {
-					for(int i = 1; i <= (mode-y); i++)
+				if((y-mode-1) < 0) {
+					for(int i = 1; i <= (mode-y-1); i++)
 						if(matrix_bot[y+i][x] == 1 || matrix_bot[y+i][x] == -1)
 							return false;
-					y += (mode-y);
+					y += (mode-y-1);
 				}else {
 					for(int i = 0; i < mode; i++)
 						if(matrix_bot[y-i][x] == 1 || matrix_bot[y-i][x] == -1)
 							return false;
 				}
-				for(int i = 0; i < mode; i++)
+				for(int i = 0; i < mode; i++) {
 					matrix_bot[y-i][x] = 1;
+					if ((x-1) >= 0)
+						matrix_bot[y-i][x-1] = -1;
+					if ((x+1) <= 9)
+						matrix_bot[y-i][x+1] = -1;
+				}
+				if ((y+1) <= 9) {
+					matrix_bot[y+1][x] = -1;
+					if ((x-1) >= 0)
+						matrix_bot[y+1][x-1] = -1;
+					if ((x+1) <= 9)
+						matrix_bot[y+1][x+1] = -1;
+				}
+				if ((y-mode) >= 0){
+					matrix_bot[y-mode][x] = -1;
+					if ((x-1) >= 0)
+						matrix_bot[y-mode][x-1] = -1;
+					if ((x+1) <= 9)
+						matrix_bot[y-mode][x+1] = -1;
+				}
 				return true;
 				
 			case 1:
-				if((x+mode) > 9) {
-					for(int i = 1; i <= ((mode+x)%9); i++)
+				if((x+mode-1) > 9) {
+					for(int i = 1; i <= ((mode+x-1)%9); i++)
 						if(matrix_bot[y][x-i] == 1 || matrix_bot[y][x-i] == -1)
 							return false;
-					x -= ((x+mode)%9);
+					x -= ((x+mode-1)%9);
 				}else {
 					for(int i = 0; i < mode; i++)
 						if(matrix_bot[y][x+i] == 1 || matrix_bot[y][x+i] == -1)
 							return false;
 				}
-				for(int i = 0; i < mode; i++)
+				for(int i = 0; i < mode; i++) {
 					matrix_bot[y][x+i] = 1;
+					if ((y-1) >= 0)
+						matrix_bot[y-1][x+i] = -1;
+					if ((y+1) <= 9)
+						matrix_bot[y+1][x+i] = -1;
+				}
+				if ((x+mode) <= 9) {
+					matrix_bot[y][x+mode] = -1;
+					if ((y-1) >= 0)
+						matrix_bot[y-1][x+mode] = -1;
+					if ((y+1) <= 9)
+						matrix_bot[y+1][x+mode] = -1;
+				}
+				if ((x-1) >= 0){
+					matrix_bot[y][x-1] = -1;
+					if ((y-1) >= 0)
+						matrix_bot[y-1][x-1] = -1;
+					if ((y+1) <= 9)
+						matrix_bot[y+1][x-1] = -1;
+				}
 				return true;
 				
 			case 2:
-				if((y+mode) > 9) {
-					for(int i = 1; i <= ((mode+y)%9); i++)
+				if((y+mode-1) > 9) {
+					for(int i = 1; i <= ((mode+y-1)%9); i++)
 						if(matrix_bot[y-i][x] == 1 || matrix_bot[y-i][x] == -1)
 							return false;
-					y -= ((y+mode)%9);
+					y -= ((y+mode-1)%9);
 				}else {
 					for(int i = 0; i < mode; i++)
 						if(matrix_bot[y+i][x] == 1 || matrix_bot[y+i][x] == -1)
 							return false;
 				}
-				for(int i = 0; i < mode; i++)
+				for(int i = 0; i < mode; i++) {
 					matrix_bot[y+i][x] = 1;
+					if ((x-1) >= 0)
+						matrix_bot[y+i][x-1] = -1;
+					if ((x+1) <= 9)
+						matrix_bot[y+i][x+1] = -1;
+				}
+				if ((y+mode) <= 9) {
+					matrix_bot[y+mode][x] = -1;
+					if ((x-1) >= 0)
+						matrix_bot[y+mode][x-1] = -1;
+					if ((x+1) <= 9)
+						matrix_bot[y+mode][x+1] = -1;
+				}
+				if ((y-1) >= 0){
+					matrix_bot[y-1][x] = -1;
+					if ((x-1) >= 0)
+						matrix_bot[y-1][x-1] = -1;
+					if ((x+1) <= 9)
+						matrix_bot[y-1][x+1] = -1;
+				}
 				return true;
 				
 			case 3:
-				if((x-mode) < 0) {
-					for(int i = 1; i <= (mode-x); i++)
+				if((x-mode-1) < 0) {
+					for(int i = 1; i <= (mode-x-1); i++)
 						if(matrix_bot[y][x+i] == 1 || matrix_bot[y][x+i] == -1)
 							return false;
-					x += (mode-x);
+					x += (mode-x-1);
 				}else {
 					for(int i = 0; i < mode; i++)
 						if(matrix_bot[y][x-i] == 1 || matrix_bot[y][x-i] == -1)
 							return false;
 				}
-				for(int i = 0; i < mode; i++)
+				for(int i = 0; i < mode; i++) {
 					matrix_bot[y][x-i] = 1;
+					if ((y-1) >= 0)
+						matrix_bot[y-1][x-i] = -1;
+					if ((y+1) <= 9)
+						matrix_bot[y+1][x-i] = -1;
+				}
+				if ((x+1) <= 9) {
+					matrix_bot[y][x+1] = -1;
+					if ((y-1) >= 0)
+						matrix_bot[y-1][x+1] = -1;
+					if ((y+1) <= 9)
+						matrix_bot[y+1][x+1] = -1;
+				}
+				if ((x-mode) >= 0){
+					matrix_bot[y][x-mode] = -1;
+					if ((y-1) >= 0)
+						matrix_bot[y-1][x-mode] = -1;
+					if ((y+1) <= 9)
+						matrix_bot[y+1][x-mode] = -1;
+				}
 				return true;
 		}
 		return false;

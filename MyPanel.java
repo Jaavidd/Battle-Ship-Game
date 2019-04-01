@@ -27,6 +27,7 @@ public class MyPanel extends JPanel{
 	int count_5 = 0;
 	
 	int cell_counter = 0;
+	int counter = 0;
 	
 	MouseListener mouse;
 	
@@ -69,7 +70,7 @@ public class MyPanel extends JPanel{
 					if(ship_obj.ship_func(matrix_usr, 2, row, column)) {
 						count_2++;
 						matrix_usr[row][column] = 1;
-						arr[row][column].setBackground(Color.RED);
+						arr[row][column].setBackground(Color.GREEN);
 						if (count_2 == 2) {
 							ship_2 = false;
 							count_2 = 0;
@@ -81,7 +82,7 @@ public class MyPanel extends JPanel{
 					if(ship_obj.ship_func(matrix_usr, 3, row, column)) {
 						count_3++;
 						matrix_usr[row][column] = 1;
-						arr[row][column].setBackground(Color.RED);
+						arr[row][column].setBackground(Color.GREEN);
 						if (count_3 == 3) {
 							ship_3 = false;
 							count_3 = 0;
@@ -93,7 +94,7 @@ public class MyPanel extends JPanel{
 					if(ship_obj.ship_func(matrix_usr, 4, row, column)) {
 						count_4++;
 						matrix_usr[row][column] = 1;
-						arr[row][column].setBackground(Color.RED);
+						arr[row][column].setBackground(Color.GREEN);
 						if (count_4 == 4) {
 							ship_4 = false;
 							count_4 = 0;
@@ -105,7 +106,7 @@ public class MyPanel extends JPanel{
 					if(ship_obj.ship_func(matrix_usr, 5, row, column)) {
 						count_5++;
 						matrix_usr[row][column] = 1;
-						arr[row][column].setBackground(Color.RED);
+						arr[row][column].setBackground(Color.GREEN);
 						if (count_5 == 5) {
 							ship_5 = false;
 							count_5 = 0;
@@ -115,7 +116,7 @@ public class MyPanel extends JPanel{
 					}
 				}
 				
-				printM();
+//				printM();
 			}
 		};
 		panelLayout = new GridLayout(10,10);
@@ -192,7 +193,20 @@ public class MyPanel extends JPanel{
 		}
 	}
 	
-	
+	public boolean shoot(Point cell) {
+		if (matrix_usr[cell.row][cell.column] == 1) {
+			arr[cell.row][cell.column].setBackground(Color.red);
+			counter++;
+			if (counter == 17) {
+				System.out.println("Bot won");
+				cell_counter--;
+				return false;
+			}
+			return true;
+		}else 
+			arr[cell.row][cell.column].setBackground(Color.black);
+		return false;
+	}
 	
 	
 	
