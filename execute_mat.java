@@ -260,10 +260,10 @@ public class execute_mat {
 		if (second ) {
 			if (second  && temp != -1) 
 				direction = temp;
-//			while(true) {
+			while(true) {
 				switch(direction) {
 					case 0 : 
-						if (matrix_visited[list.row-1][list.column] == 1) {
+						if (list.row != 0 && matrix_visited[list.row-1][list.column] == 1) {
 							direction = (direction+1)%4;
 	//						return rand_point();
 						}else {
@@ -272,7 +272,7 @@ public class execute_mat {
 						}
 						
 					case 1 : 
-						if (matrix_visited[list.row][list.column+1] == 1) {
+						if (list.column != 9 && matrix_visited[list.row][list.column+1] == 1) {
 							direction = (direction+1)%4;
 	//						return rand_point();
 						}else {
@@ -280,7 +280,7 @@ public class execute_mat {
 							return new Point(list.row, list.column+1);
 						}	
 					case 2 : 
-						if (matrix_visited[list.row+1][list.column] == 1) {
+						if (list.row != 9 && matrix_visited[list.row+1][list.column] == 1) {
 							direction = (direction+1)%4;
 	//						return rand_point();
 						}else {
@@ -288,7 +288,7 @@ public class execute_mat {
 							return new Point(list.row+1, list.column);
 						}
 					case 3 : 
-						if (matrix_visited[list.row][list.column-1] == 1) {
+						if (list.column != 0 && matrix_visited[list.row][list.column-1] == 1) {
 							direction = (direction+1)%4;
 	//						return rand_point();
 						}else {
@@ -296,7 +296,7 @@ public class execute_mat {
 							return new Point(list.row, list.column-1);
 						}
 				}
-//			}
+			}
 		}
 		Random random = new Random();
 		int row = random.nextInt(10);
