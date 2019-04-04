@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JButton;
@@ -20,9 +21,16 @@ public class EnemyPanel extends JPanel{
 	MouseListener mouse;
 	int counter = 18;
 	
+//	ArrayList<Point> list;
+	Point list;
+	int direction = 0;
+	boolean second = false;
+	int temp = -1;
+	Point temp_point;
 	
 	
 	public EnemyPanel(MyPanel panelLeft) {
+//		list = new ArrayList<>(5);
 		this.panelLeft = panelLeft;
 		matrix_bot = rand_gen.getMatrix_bot();
 		mouse = new MouseListener() {
@@ -51,19 +59,36 @@ public class EnemyPanel extends JPanel{
 								column = j;
 								break;	
 							}
-					if (arr[row][column].getBackground() != Color.black || arr[row][column].getBackground() != Color.red) {
+					if (arr[row][column].getBackground() != Color.black && arr[row][column].getBackground() != Color.red) {
 						if (matrix_bot[row][column] == 1) {
 							arr[row][column].setBackground(Color.red);
 							counter--;
 						}else {
 							arr[row][column].setBackground(Color.black);
-							while(panelLeft.shoot(rand_point()));
+//							while(panelLeft.shoot(rand_point()));
+							temp_point = rand_point();
+							while(panelLeft.shoot(temp_point)) {
+								if (second) 
+									temp = direction;
+								else
+									second = true;
+								list = temp_point;
+								temp_point = rand_point();
+//								list.add(temp_point);
+							}
+							if (second && temp != -1) {
+//								list.clear();
+								second = false;
+								temp = -1;
+								direction = 0;
+		
+							}
 						}
-						System.out.println("counter is "+ counter);
-						if (counter == 0) {
-							System.out.println("User won");
-							panelLeft.cell_counter = 16;
-						}
+//						System.out.println("counter is "+ counter);
+//						if (counter == 0) {
+//							System.out.println("User won");
+//							panelLeft.cell_counter = 16;
+//						}
 					}
 					
 				}
@@ -109,7 +134,102 @@ public class EnemyPanel extends JPanel{
 	}
 	
 	
+//	public Point rand_point() {
+//		if (list.size() > 0) {
+//			if (second  && temp != -1) 
+//				direction = temp;
+////			while(true) {
+//				switch(direction) {
+//					case 0 : 
+//						if (matrix_visited[list.get(0).row-1][list.get(0).column] == 1) {
+//							direction = (direction+1)%4;
+//	//						return rand_point();
+//						}else {
+//							matrix_visited[list.get(0).row-1][list.get(0).column] = 1;
+//							return new Point(list.get(0).row-1, list.get(0).column);
+//						}
+//						
+//					case 1 : 
+//						if (matrix_visited[list.get(0).row][list.get(0).column+1] == 1) {
+//							direction = (direction+1)%4;
+//	//						return rand_point();
+//						}else {
+//							matrix_visited[list.get(0).row][list.get(0).column+1] = 1;
+//							return new Point(list.get(0).row, list.get(0).column+1);
+//						}	
+//					case 2 : 
+//						if (matrix_visited[list.get(0).row+2][list.get(0).column] == 1) {
+//							direction = (direction+1)%4;
+//	//						return rand_point();
+//						}else {
+//							matrix_visited[list.get(0).row+2][list.get(0).column] = 1;
+//							return new Point(list.get(0).row+1, list.get(0).column);
+//						}
+//					case 3 : 
+//						if (matrix_visited[list.get(0).row][list.get(0).column-1] == 1) {
+//							direction = (direction+1)%4;
+//	//						return rand_point();
+//						}else {
+//							matrix_visited[list.get(0).row][list.get(0).column-1] = 1;
+//							return new Point(list.get(0).row, list.get(0).column-1);
+//						}
+//				}
+////			}
+//		}
+//		Random random = new Random();
+//		int row = random.nextInt(10);
+//		int column = random.nextInt(10);
+//		while(matrix_visited[row][column] == 1) {
+//			row = random.nextInt(10);
+//			column = random.nextInt(10);
+//		}
+//		matrix_visited[row][column] = 1;
+//		return new Point(row, column);
+//	}
+	
+	
 	public Point rand_point() {
+		if (second ) {
+			if (second  && temp != -1) 
+				direction = temp;
+//			while(true) {
+				switch(direction) {
+					case 0 : 
+						if (matrix_visited[list.row-1][list.column] == 1) {
+							direction = (direction+1)%4;
+	//						return rand_point();
+						}else {
+							matrix_visited[list.row-1][list.column] = 1;
+							return new Point(list.row-1, list.column);
+						}
+						
+					case 1 : 
+						if (matrix_visited[list.row][list.column+1] == 1) {
+							direction = (direction+1)%4;
+	//						return rand_point();
+						}else {
+							matrix_visited[list.row][list.column+1] = 1;
+							return new Point(list.row, list.column+1);
+						}	
+					case 2 : 
+						if (matrix_visited[list.row+1][list.column] == 1) {
+							direction = (direction+1)%4;
+	//						return rand_point();
+						}else {
+							matrix_visited[list.row+1][list.column] = 1;
+							return new Point(list.row+1, list.column);
+						}
+					case 3 : 
+						if (matrix_visited[list.row][list.column-1] == 1) {
+							direction = (direction+1)%4;
+	//						return rand_point();
+						}else {
+							matrix_visited[list.row][list.column-1] = 1;
+							return new Point(list.row, list.column-1);
+						}
+				}
+//			}
+		}
 		Random random = new Random();
 		int row = random.nextInt(10);
 		int column = random.nextInt(10);
@@ -120,9 +240,6 @@ public class EnemyPanel extends JPanel{
 		matrix_visited[row][column] = 1;
 		return new Point(row, column);
 	}
-	
-	
-	
 	
 	
 

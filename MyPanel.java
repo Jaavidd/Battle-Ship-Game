@@ -196,12 +196,12 @@ public class MyPanel extends JPanel{
 	public boolean shoot(Point cell) {
 		if (matrix_usr[cell.row][cell.column] == 1) {
 			arr[cell.row][cell.column].setBackground(Color.red);
-			counter++;
-			if (counter == 17) {
-				System.out.println("Bot won");
-				cell_counter--;
-				return false;
-			}
+//			counter++;
+//			if (counter == 17) {
+//				System.out.println("Bot won");
+//				cell_counter--;
+//				return false;
+//			}
 			return true;
 		}else 
 			arr[cell.row][cell.column].setBackground(Color.black);
